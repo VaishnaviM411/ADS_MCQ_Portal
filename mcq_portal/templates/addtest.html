@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content%}
+
+
+<div class="row">
+                            
+    <div class="col-lg-12">
+        <div class="p-5">
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Test</h1>
+            </div>
+            {% if messages %}
+        <div class="message">
+            {% for message in messages %}
+            <p>{{message}}</p><br>
+            {% endfor %}
+        </div>
+        {% endif %}
+            <form class="user" method="post" enctype="multipart/form-data" action="{% url "AddTest" %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-user"
+                        id="exampleInputEmail" aria-describedby="emailHelp"
+                        placeholder="Enter Test ID"
+                        name="test_id" required>
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control form-control-user"
+                        id="exampleInputPassword" placeholder="Duration"
+                        name="duration" required>
+                </div>
+                <div class="form-group">
+                    <label>Active Now: </label>
+                    <input type="radio" class="form-control form-control-user"
+                        id="exampleInputEmail" aria-describedby="emailHelp"
+                        value="true" name="active" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-control form-control-user">Course</label>
+                    <select class="form-control form-control-user"
+                        placeholder="Course"
+                        name="course" required>
+                    
+                    {% for i in courses %}
+
+                    <option value="{{i.course_id}}">{{i.name}}</option>
+                    {% endfor %}
+                </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="SAVE" class="btn btn-primary btn-user btn-block"
+                    >
+                </div>
+                
+                
+            </form>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
